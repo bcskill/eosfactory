@@ -248,8 +248,8 @@ EOSFactory expects eosio version {}. Install eosio, if not installed:
             if self.os_version == utils.UBUNTU:
                 command = \
 '''sudo apt remove eosio.cdt &&\\
-wget https://github.com/eosio/eosio.cdt/releases/download/v1.6.1/eosio.cdt_1.6.1-1_amd64.deb &&\\
-sudo apt install ./eosio.cdt_1.6.1-1_amd64.deb
+wget https://github.com/eosio/eosio.cdt/releases/download/v1.6.2/eosio.cdt_1.6.2-1_amd64.deb &&\\
+sudo apt install ./eosio.cdt_1.6.2-1_amd64.deb
 '''
             elif self.os_version == utils.DARWIN:
                 command = \
