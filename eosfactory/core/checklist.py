@@ -155,14 +155,14 @@ EOSIO nodeos can fail with Windows WSL Ubuntu below version 16.
                 if ubuntu_version and ubuntu_version == 16:
                     command = \
 '''sudo apt remove eosio &&\\
-wget https://github.com/eosio/eos/releases/download/v1.8.0/eosio_1.8.0-1-ubuntu-16.04_amd64.deb &&\\
-sudo apt install ./eosio_1.8.0-1-ubuntu-16.04_amd64.deb                
+wget https://github.com/eosio/eos/releases/download/v1.8.1/eosio_1.8.1-1-ubuntu-16.04_amd64.deb &&\\
+sudo apt install ./eosio_1.8.1-1-ubuntu-16.04_amd64.deb                
 '''
                 else:
                     command = \
 '''sudo apt remove eosio &&\\
-wget https://github.com/eosio/eos/releases/download/v1.8.0/eosio_1.8.0-1-ubuntu-18.04_amd64.deb &&\\
-apt install ./eosio_1.8.0-1-ubuntu-18.04_amd64.deb
+wget https://github.com/eosio/eos/releases/download/v1.8.1/eosio_1.8.1-1-ubuntu-18.04_amd64.deb &&\\
+sudo apt install ./eosio_1.8.1-1-ubuntu-18.04_amd64.deb
 '''
             elif self.os_version == utils.DARWIN:
                 command = \
