@@ -8,7 +8,7 @@ import eosfactory.core.teos as teos
 import eosfactory.core.cleos as cleos
 import eosfactory.core.cleos_set as cleos_set
 import eosfactory.shell.account
-
+import eosfactory.core.account as core_account
 
 class ContractBuilder():
     '''Build or delete a contract project.
@@ -102,7 +102,7 @@ class Contract(ContractBuilder):
             ref_block=None,
             delay_sec=0):
         
-        if not isinstance(account, eosfactory.shell.account.Account):
+        if not isinstance(account, eosfactory.shell.account.Account) and not isinstance(account, core_account.Eosio):
             raise errors.Error("""
             The account object has to be of the type 
             ``eosfactory.shell.account.Account``.
