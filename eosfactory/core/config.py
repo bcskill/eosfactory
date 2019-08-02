@@ -12,7 +12,7 @@ import eosfactory.core.utils as utils
 
 
 VERSION = "3.4.0"
-EOSIO_VERSION = "1.8.0"
+EOSIO_VERSION = "1.6.6"
 EOSIO_CDT_VERSION = "1.6.1"
 PYTHON_VERSION = "3.5 or higher"
 UBUNTU_VERSION_MIN = 18
