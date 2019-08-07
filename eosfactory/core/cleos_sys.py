@@ -92,6 +92,7 @@ class SystemNewaccount(interface.Account, cleos.Cleos):
         if delay_sec:
             args.extend(["--delay-sec", delay_sec])
 
+        print(args)
         cleos.Cleos.__init__(
             self, args, "system", "newaccount", is_verbose)
             

@@ -814,7 +814,8 @@ def new_account(
         delay_sec=0,        
         buy_ram_kbytes=8, buy_ram="",
         transfer=False,
-        restore=False):
+        restore=False,
+        is_sys_create=True):
     '''Create account object in caller's global namespace.
 
     Wraps the account factory function :func:`create_account` so that the 
@@ -863,7 +864,8 @@ def new_account(
         delay_sec,        
         buy_ram_kbytes, buy_ram,
         transfer,
-        restore)
+        restore,
+        is_sys_create)
 
 
 def create_account(
@@ -880,9 +882,10 @@ def create_account(
         delay_sec=0,        
         buy_ram_kbytes=8, buy_ram="",
         transfer=False,
-        restore=False):
+        restore=False,
+        is_sys_create=False):
     '''Create account object in caller's global namespace.
-    
+
     Args:
         account_object_name (str): The name of the account object returned.
         creator (str or .core.interface.Account): The account creating the new 
@@ -947,7 +950,7 @@ def create_account(
             owner_key = cleos.CreateKey(is_verbose=False)
             active_key = cleos.CreateKey(is_verbose=False)
 
-        if stake_net and not manager.is_local_testnet():
+        if stake_net and (is_sys_create or not manager.is_local_testnet()):
             logger.INFO('''
                         ... delegating stake to a new blockchain account ``{}`` mapped as ``{}``.
                         '''.format(account_name, account_object_name))
@@ -962,8 +965,7 @@ def create_account(
                         expiration_sec, 
                         skip_sign, dont_broadcast, force_unique,
                         max_cpu_usage, max_net_usage,
-                        ref_block,
-                        delay_sec
+                        ref_block
                         )
             except errors.LowRamError as e:
                 logger.TRACE('''
