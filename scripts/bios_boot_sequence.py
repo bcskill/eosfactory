@@ -68,16 +68,16 @@ INFO(contract_dir)
 reset()
 COMMENT('''Create important system accounts''')
 eosio = new_master_account()
-eosio_bpay = new_account(eosio, "eosio.bpay")
-eosio_msig = new_account(eosio, "eosio.msig")
-eosio_names = new_account(eosio, "eosio.names")
-eosio_ram = new_account(eosio, "eosio.ram")
-eosio_ramfee = new_account(eosio, "eosio.ramfee")
-eosio_saving = new_account(eosio, "eosio.saving")
-eosio_stake = new_account(eosio, "eosio.stake")
-eosio_token = new_account(eosio, "eosio.token")
-eosio_vpay = new_account(eosio, "eosio.vpay")
-
+eosio_token = new_account(eosio, "eosio.token", is_sys_create=False)
+eosio_ram = new_account(eosio, "eosio.ram", is_sys_create=False)
+eosio_ramfee = new_account(eosio, "eosio.ramfee", is_sys_create=False)
+eosio_stake = new_account(eosio, "eosio.stake", is_sys_create=False)
+eosio_bpay = new_account(eosio, "eosio.bpay", is_sys_create=False)
+eosio_vpay = new_account(eosio, "eosio.vpay", is_sys_create=False)
+eosio_msig = new_account(eosio, "eosio.msig", is_sys_create=False)
+eosio_names = new_account(eosio, "eosio.names", is_sys_create=False)
+eosio_saving = new_account(eosio, "eosio.saving", is_sys_create=False)
+eosio_rex = new_account(eosio, "eosio.rex", is_sys_create=False)
 
 COMMENT('''Install the eosio.token contract''')
 contract = "eosio.token"
@@ -100,16 +100,16 @@ contract_object = Contract(
     )
 contract_object.deploy()
 
-COMMENT('''Create and allocate the SYS currency''')
+COMMENT('''Create and allocate the EOS currency''')
 
 eosio_token.push_action(
     "create",
-    [eosio, "10000000000.0000 SYS"],
+    [eosio, "10000000000.0000 EOS"],
     (eosio_token, Permission.ACTIVE))
 
 eosio_token.push_action(
     "issue",
-    [eosio, "1000000000.0000 SYS", "memo"],
+    [eosio, "1000000000.0000 EOS", "memo"],
     (eosio, Permission.ACTIVE))
 
 COMMENT('''Set the eosio.system contract''')
@@ -124,4 +124,10 @@ contract_object = Contract(
 
 contract_object.deploy()
 
-stop()
+COMMENT('''Init the eosio.system contract''')
+cleos.PushAction(
+    eosio,
+    "init",
+    '[0, "4,EOS"]',
+    (eosio, Permission.ACTIVE))
+
