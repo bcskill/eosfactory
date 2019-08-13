@@ -418,10 +418,10 @@ class Account():
             expiration_sec=None, 
             skip_sign=0, dont_broadcast=0, force_unique=0,
             max_cpu_usage=0, max_net_usage=0,
-            ref_block=None):
+            ref_block=None, is_force = False):
 
         stop_if_account_is_not_set(self)
-        if manager.is_local_testnet():
+        if manager.is_local_testnet() and not is_force:
             return
 
         if receiver is None:
